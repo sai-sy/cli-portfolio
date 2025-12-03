@@ -10,8 +10,15 @@ text-align: center, and a monospaced font on a full-screen container.
 confirm colors/fonts match the existing JetBrains Mono + dark palette.
  */
 
+import TypeText from "../components/TypeText";
+
+
 function Load() {
- return (<><p>sudo loadPortfolio.exe</p></>) 
+  return (
+    <div className="load">
+      <TypeText text = "sudo loadPortfolio.exe"/>
+    </div>
+  )
 }
 
 export default Load;

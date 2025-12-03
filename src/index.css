@@ -11,6 +11,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --mocha-rosewater: #f5e0dc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  /*max-width: 1280px;*/
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
 a {
@@ -70,4 +83,29 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.cursor {
+  animation: blink 0.75s step-end infinite;
+  color: var(--mocha-rosewater);
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
