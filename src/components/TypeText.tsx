@@ -1,43 +1,60 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 type TypeTextProps = {
-  text: string
-  className?: string
-  speed?: number
-  showCursor?: boolean
-  delay?: number
-}
+  text: string;
+  className?: string;
+  speed?: number;
+  showCursor?: boolean;
+  delay?: number;
+  onComplete: () => void;
+};
 
-function TypeText({ text, className, speed = 50, showCursor = true, delay = 1500 }: TypeTextProps) {
-  const [typed, setTyped] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
+function TypeText({
+  text,
+  className,
+  speed = 50,
+  showCursor = true,
+  delay = 1500,
+  onComplete,
+}: TypeTextProps) {
+  const [typed, setTyped] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   useEffect(() => {
-    setTyped('');
+    setTyped("");
     setIsTyping(false);
+    let timer: ReturnType<typeof setInterval> | null = null
     const timeout = setTimeout(() => {
-      setIsTyping(true)
+      setIsTyping(true);
       let index = 0;
-      const timer = setInterval(() => {
+      timer = setInterval(() => {
         index += 1;
-        setTyped(text.slice(0, index))
+        setTyped(text.slice(0, index));
         if (index === text.length) {
-          clearInterval(timer);
+          clearInterval(timer!);
           setIsTyping(false);
+          onComplete();
         }
       }, speed);
-      return () => clearInterval(timer);
-    }, delay)
-    return () => clearTimeout(timeout)
-  }, [text, speed, delay])
+    }, delay);
+    return () => {
+      clearTimeout(timeout);
+      if (timer) clearInterval(timer);
+    }
+  }, [text, speed, delay, onComplete]);
   return (
     <>
-      <p className={className}>
-      {typed}{showCursor && <span className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}>▌
-        </span>}
-      </p >
-
+      <span className={className}>
+        {typed}
+        {showCursor && (
+          <span
+            className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
+          >
+            ▌
+          </span>
+          )}
+      </span>
     </>
-  )
+  );
 }
 
-export default TypeText
+export default TypeText;

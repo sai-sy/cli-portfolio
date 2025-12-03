@@ -1,18 +1,20 @@
 :root {
-  font-family: "JetBrains Mono", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --mocha-rosewater: #f5e0dc;
+  --mocha-base: #1e1e2e;
+  --mocha-text: #cdd6f4;
+  font-family:
+    "JetBrains Mono", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #cdd6f4;
-  background-color: #1e1e2e;
+  color: var(--mocha-text);
+  background-color: var(--mocha-base);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --mocha-rosewater: #f5e0dc;
 }
 
 * {
@@ -91,7 +93,6 @@ button:focus-visible {
 }
 
 @keyframes blink {
-
   0%,
   100% {
     opacity: 1;
