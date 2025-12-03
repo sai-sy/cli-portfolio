@@ -1,9 +1,11 @@
 type LoadProps = {
-  onFinished: () => void
+  onFinished?: () => void
 }
 import TypeText from "../components/TypeText";
 
-export default function Load({ onFinished }: LoadProps) {
+export function enter(){};
+export function exit(){};
+export default function Load({ onFinished = () => {} }: LoadProps) {
   return (
     <div className="load">
       <h1>
