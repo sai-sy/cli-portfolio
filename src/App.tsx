@@ -5,7 +5,7 @@ import type { ViewName } from "./viewRegistry";
 
 export default function App() {
 
-  const [currentView, setCurrentView] = useState<ViewName>("home");
+  const [currentView, setCurrentView] = useState<ViewName>("load");
   const previousView = useRef<ViewName>("home");
   const changeView = async (next: ViewName) => {
     const old = previousView.current;
@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <main>
-    <section></section>
+    <section>{views[currentView].component}</section>
     </main>
   )
 }
