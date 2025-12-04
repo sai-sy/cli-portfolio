@@ -27,7 +27,7 @@ export default function Home({
         <TypeText
           text="I build this page using Vite, React, Typescript, TSX and am hosting it on Railway. My goal is eventually make this my portfolio site that can be used like a command line while still being visually appealing and usable by a normal user" 
           delay={300}
-          speed={40}
+          speed={20}
           animate={transitionIn}
           fileDir = {null}
           onComplete={() => {
