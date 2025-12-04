@@ -6,6 +6,8 @@ type TypeTextProps = {
   speed?: number;
   showCursor?: boolean;
   delay?: number;
+  animate?: boolean;
+  fileDir: string | null;
   onComplete: () => void;
 };
 
@@ -14,15 +16,23 @@ function TypeText({
   className,
   speed = 50,
   showCursor = true,
-  delay = 1500,
+  delay = 0,
+  animate = true,
+  fileDir,
   onComplete,
 }: TypeTextProps) {
   const [typed, setTyped] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [cursor, setCursor] =  useState(showCursor)
   useEffect(() => {
+    if (!animate) {
+      setTyped(text);
+      onComplete();
+      return;
+    }
     setTyped("");
     setIsTyping(false);
-    let timer: ReturnType<typeof setInterval> | null = null
+    let timer: ReturnType<typeof setInterval> | null = null;
     const timeout = setTimeout(() => {
       setIsTyping(true);
       let index = 0;
@@ -32,6 +42,7 @@ function TypeText({
         if (index === text.length) {
           clearInterval(timer!);
           setIsTyping(false);
+          setCursor(false);
           onComplete();
         }
       }, speed);
@@ -39,19 +50,19 @@ function TypeText({
     return () => {
       clearTimeout(timeout);
       if (timer) clearInterval(timer);
-    }
+    };
   }, [text, speed, delay, onComplete]);
   return (
     <>
       <span className={className}>
-        {typed}
-        {showCursor && (
+      {fileDir ? `${fileDir}$ ` : ``}{typed}
+        {cursor && (
           <span
             className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
           >
             ▌
           </span>
-          )}
+        )}
       </span>
     </>
   );
