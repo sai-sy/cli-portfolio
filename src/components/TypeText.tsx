@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-type TypeTextProps = {
-  text: string;
+export type TypeTextProps = {
+  text: string | undefined;
   className?: string;
   speed?: number;
   showCursor?: boolean;
   delay?: number;
   animate?: boolean;
-  fileDir: string | null;
+  fileDir?: string | null;
   onComplete: () => void;
 };
 
@@ -23,7 +23,8 @@ function TypeText({
 }: TypeTextProps) {
   const [typed, setTyped] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [cursor, setCursor] =  useState(showCursor)
+  const [cursor, setCursor] = useState(showCursor);
+  if (!text) text = "";
   useEffect(() => {
     if (!animate) {
       setTyped(text);
@@ -55,7 +56,8 @@ function TypeText({
   return (
     <>
       <span className={className}>
-      {fileDir ? `${fileDir}$ ` : ``}{typed}
+        {fileDir ? `${fileDir}$ ` : ``}
+        {typed}
         {cursor && (
           <span
             className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
