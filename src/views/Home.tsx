@@ -1,9 +1,10 @@
 import { useState } from "react";
 import TypeText from "../components/TypeText";
+import type { ViewName } from "../viewRegistry";
 
 type HomeProps = {
   transitionIn?: boolean;
-  onComplete?: (...args: any[]) => void;
+  onComplete?: (name: ViewName) => void;
 };
 
 export default function Home({
@@ -27,8 +28,12 @@ export default function Home({
           text="crafting CLI-inspired interactions IRL"
           delay={300}
           speed={40}
+          animate={transitionIn}
           fileDir = {null}
-          onComplete={() => {}}
+          onComplete={() => {
+            setTimeout(() => {
+              onComplete("home");
+            }, 175);}}
         />
       )}
     </div>
