@@ -58,7 +58,7 @@ function TypeText({
       <span className={className}>
         {fileDir ? `${fileDir}$ ` : ``}
         {typed}
-        {cursor && (
+        {showCursor && cursor && (
           <span
             className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
           >

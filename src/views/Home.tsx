@@ -30,6 +30,7 @@ export default function Home({
       <LineOutList
         lines={lineouts}
         animate={transitionIn}
+        typeDefaults={{speed: 0}}
         onComplete={() => onComplete("home")}
       />
     </div>

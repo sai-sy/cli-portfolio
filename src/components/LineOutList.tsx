@@ -53,6 +53,14 @@ export default function LineOutList({
   return (
     <>
       {safeLines.map((line, index) => {
+        if (index < current) {
+          const Tag  = line.component;
+          return (
+            <Tag key={line.key} className={line.className}>
+            {line.content}
+            </Tag>
+          )
+        }
         if (index > current) return null;
 
         const Tag = line.component;
