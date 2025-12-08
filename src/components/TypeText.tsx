@@ -9,7 +9,7 @@ export type TypeTextProps = {
   showCursor?: boolean;
   delay?: number;
   animate?: boolean;
-  fileDir?: boolean;
+  fileDir?: boolean | string;
   onComplete: () => void;
 };
 
@@ -19,7 +19,7 @@ function TypeText({
   speed = 50,
   showCursor = true,
   delay = 0,
-  animate = true,
+  animate = false,
   fileDir = false,
   onComplete,
 }: TypeTextProps) {
@@ -61,9 +61,14 @@ function TypeText({
   }, [text, speed, delay, onComplete]);
   return (
     <>
-      {fileDir ? (
+      {fileDir === true ? (
         <>
           <span className="fileDir">{cwd}</span>
+          {"$ "}
+        </>
+      ) : typeof fileDir === "string" ? (
+        <>
+          <span className="fileDir">{fileDir}</span>
           {"$ "}
         </>
       ) : (

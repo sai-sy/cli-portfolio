@@ -9,7 +9,7 @@ export type LineOut = {
   typeProps?: {
     animate?: boolean;
     speed?: number;
-    fileDir?: boolean;
+    fileDir?: boolean | string;
     delay?: number;
     showCursor?: boolean;
   };

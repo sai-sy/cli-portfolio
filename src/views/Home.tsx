@@ -15,14 +15,32 @@ const lineouts: LineOut[] = [
     component: "p",
   },
   {
+    key: "nav-ls",
+    content: "ls",
+    component: "p",
+    typeProps: {
+      fileDir: "~",
+    },
+  },
+  {
+    key: "nav",
+    content: "projects        experience        contact",
+    component: "nav",
+  },
+  {
     key: "third",
     content: "cat projects",
     component: "p",
     typeProps: {
-      fileDir: true
-    }
+      fileDir: "~",
+    },
   },
-  {key: "fourth", content:"blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph  blah blah example long text paragraph", component: "p"}
+  {
+    key: "fourth",
+    content:
+      "blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph  blah blah example long text paragraph",
+    component: "p",
+  },
 ];
 
 export default function Home({
@@ -34,7 +52,7 @@ export default function Home({
       <LineOutList
         lines={lineouts}
         animate={transitionIn}
-        typeDefaults={{speed: 0}}
+        typeDefaults={{ speed: 0 }}
         onComplete={() => onComplete("home")}
       />
     </div>
