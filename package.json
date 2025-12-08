@@ -11,6 +11,7 @@
     "docker-local": "docker build -t mysite . && docker run -p 8080:80 mysite"
   },
   "dependencies": {
+    "@catppuccin/palette": "^1.7.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { CwdContext } from "../context/CwdContext";
 
 export type TypeTextProps = {
   text: string | undefined;
@@ -7,7 +9,7 @@ export type TypeTextProps = {
   showCursor?: boolean;
   delay?: number;
   animate?: boolean;
-  fileDir?: string | null;
+  fileDir?: boolean;
   onComplete: () => void;
 };
 
@@ -18,16 +20,20 @@ function TypeText({
   showCursor = true,
   delay = 0,
   animate = true,
-  fileDir,
+  fileDir = false,
   onComplete,
 }: TypeTextProps) {
   const [typed, setTyped] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [cursor, setCursor] = useState(showCursor);
+  const { cwd, setCwd: _unused } = useContext(CwdContext)!;
+
   if (!text) text = "";
   useEffect(() => {
+    let index = 0;
     if (!animate) {
       setTyped(text);
+      index = text.length;
       onComplete();
       return;
     }
@@ -36,7 +42,7 @@ function TypeText({
     let timer: ReturnType<typeof setInterval> | null = null;
     const timeout = setTimeout(() => {
       setIsTyping(true);
-      let index = 0;
+      //let index = 0;
       timer = setInterval(() => {
         index += 1;
         setTyped(text.slice(0, index));
@@ -55,17 +61,22 @@ function TypeText({
   }, [text, speed, delay, onComplete]);
   return (
     <>
-      <span className={className}>
-        {fileDir ? `${fileDir}$ ` : ``}
-        {typed}
-        {showCursor && cursor && (
-          <span
-            className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
-          >
-            ▌
-          </span>
-        )}
-      </span>
+      {fileDir ? (
+        <>
+          <span className="fileDir">{cwd}</span>
+          {"$ "}
+        </>
+      ) : (
+        ""
+      )}
+      {typed}
+      {showCursor && cursor && (
+        <span
+          className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
+        >
+          ▌
+        </span>
+      )}
     </>
   );
 }

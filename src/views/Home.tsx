@@ -9,16 +9,20 @@ type HomeProps = {
 const lineouts: LineOut[] = [
   { key: "title", content: "Saihaan Syed", component: "h1" },
   {
-    key: "subtitle",
+    key: "desc",
     content:
       "I build this page using Vite, React, Typescript, TSX and am hosting it on Railway. My goal is eventually make this my portfolio site that can be used like a command line while still being visually appealing and usable by a normal user",
     component: "p",
   },
   {
     key: "third",
-    content: "BLAH BL AH",
-    component: "h2",
+    content: "cat projects",
+    component: "p",
+    typeProps: {
+      fileDir: true
+    }
   },
+  {key: "fourth", content:"blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph  blah blah example long text paragraph", component: "p"}
 ];
 
 export default function Home({

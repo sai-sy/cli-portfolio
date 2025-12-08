@@ -7,7 +7,9 @@ export type LineOut = {
   key?: string;
   className?: string;
   typeProps?: {
+    animate?: boolean;
     speed?: number;
+    fileDir?: boolean;
     delay?: number;
     showCursor?: boolean;
   };
@@ -54,12 +56,19 @@ export default function LineOutList({
     <>
       {safeLines.map((line, index) => {
         if (index < current) {
-          const Tag  = line.component;
+          const Tag = line.component;
           return (
-            <Tag key={line.key} className={line.className}>
-            {line.content}
+            <Tag key={line.key} className={`${line.className ?? ""} lineout`}>
+              <TypeText
+                text={line.content ?? ""}
+                animate={false}
+                fileDir={line.typeProps?.fileDir}
+                showCursor={false}
+                // anything else needed
+                onComplete={() => {}}
+              />
             </Tag>
-          )
+          );
         }
         if (index > current) return null;
 
@@ -71,11 +80,20 @@ export default function LineOutList({
             : { ...typeDefaults, ...line.typeProps };
 
         return (
-          <Tag key={line.key} className={line.className}>
+          <Tag key={line.key} className={`${line.className ?? ""} lineout`}>
             <TypeText
               {...mergedTypeProps}
               text={line.content ?? ""}
-              animate={animate ? isActive : false}
+              animate={
+                mergedTypeProps?.animate == false
+                  ? false
+                  : animate
+                    ? isActive
+                    : false
+              }
+              fileDir={
+                line.typeProps?.fileDir ? line.typeProps?.fileDir : false
+              }
               showCursor={
                 typeof mergedTypeProps.showCursor === "boolean"
                   ? mergedTypeProps.showCursor && isActive
