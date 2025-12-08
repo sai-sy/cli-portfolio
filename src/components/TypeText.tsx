@@ -15,7 +15,7 @@ export type TypeTextProps = {
 
 function TypeText({
   text,
-  className,
+  className: _notused,
   speed = 50,
   showCursor = true,
   delay = 0,
