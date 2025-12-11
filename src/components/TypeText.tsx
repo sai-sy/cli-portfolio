@@ -10,7 +10,7 @@ export type TypeTextProps = {
   delay?: number;
   animate?: boolean;
   fileDir?: boolean | string;
-  onComplete: () => void;
+  onComplete?: () => void;
 };
 
 function TypeText({
