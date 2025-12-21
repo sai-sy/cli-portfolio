@@ -94,17 +94,17 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
             },
           };
           const showPrompt =
-            node.key == "home-root" && (childnode.typeProps?.fileDir);
+            node.key == "home-root" && childnode.typeProps?.fileDir;
 
           return (
-            <>
+            <span className="lineout">
               {showPrompt && (
                 <>
-                  <span className={`fileDir ${childnode.key}`}>{cwd}</span>
-                  {"$ "}
+                  <span className="fileDir">{cwd}</span>${" "}
                 </>
-              )}<SaiDOMRender node={childnode} />
-            </>
+              )}
+              <SaiDOMRender node={childnode} />
+            </span>
           );
         }
         if (index > current) return null;
