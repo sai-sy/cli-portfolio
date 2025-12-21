@@ -21,7 +21,7 @@ function TypeText({
   delay = 0,
   animate = false,
   fileDir = false,
-  onComplete,
+  onComplete = () => {},
 }: TypeTextProps) {
   const [typed, setTyped] = useState("");
   const [isTyping, setIsTyping] = useState(false);

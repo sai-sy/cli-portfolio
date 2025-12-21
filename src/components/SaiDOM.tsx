@@ -27,27 +27,26 @@ export type VAttrs = Record<string, VAttrValue>;
 
 export type SaiNode = SaiElement | string;
 
-export function SaiDOMRender(node: SaiNode) {
-  /*
-  if (isSaiString(node)) {
-    return node;
-  }
-  */
-  if (typeof node == "string") {
+type SaiDomRenderProps = { node: SaiNode };
+
+export function SaiDOMRender({ node }: SaiDomRenderProps) {
+  console.log("SaiDOMRender", node);
+  if (typeof node === "string") {
     return node;
   }
   const [current, setCurrent] = useState(0);
   const safeChildNodes = useMemo(
     () =>
-      node.children?.map((child, index) => {
-        if (typeof child == "string") {
-          return node;
-        }
-        return {
-          ...child,
-          key: `${child.key}-${index}-${"component" in child ? child.component : "str"}`,
-        };
-      }) ?? [],
+      node.children?.map((child, index) =>
+        typeof child === "string"
+          ? child
+          : {
+              ...child,
+              key:
+                child.key ??
+                `node-${index}-${"component" in child ? child.component : "str"}`,
+            },
+      ) ?? [],
     [node.children],
   );
 
@@ -62,26 +61,67 @@ export function SaiDOMRender(node: SaiNode) {
     [node.onComplete, safeChildNodes.length],
   );
   const Root = node.component;
+  console.log("render", node.key);
   return (
     <Root key={node.key} className={`${node.attrs?.className ?? ""} domout`}>
       {safeChildNodes.map((child, index) => {
+        const isActive = index === current;
+
         if (index < current) {
-          if (typeof child == "string") {
-            return <TypeText text={child} {...node.typeProps} />;
+          if (typeof child === "string") {
+            return (
+              <TypeText
+                key={`${node.key ?? "text"}-${index}`}
+                text={child}
+                {...node.typeProps}
+                {...node.childrenProps}
+                animate={false}
+                showCursor={false}
+                onComplete={() => {}}
+              />
+            );
           }
-          return SaiDOMRender({
-            component: child.component,
-            attrs: child.attrs,
+          let childnode: SaiNode = {
+            ...child,
             typeProps: {
+              ...node.typeProps,
               ...child.typeProps,
+              ...node.childrenProps,
               animate: false,
               showCursor: false,
             },
-          });
+          };
+          return <SaiDOMRender node={childnode} />;
         }
         if (index > current) return null;
 
-        const isActive = index === current;
+        if (typeof child === "string") {
+          const mergedTypeProps = {
+            ...node.typeProps,
+            ...node.childrenProps,
+          };
+          const statefulTypeProps = { ...mergedTypeProps };
+          statefulTypeProps.animate =
+            mergedTypeProps.animate === false
+              ? false
+              : node.typeProps?.animate
+                ? isActive
+                : false;
+          statefulTypeProps.showCursor =
+            typeof mergedTypeProps.showCursor === "boolean"
+              ? mergedTypeProps.showCursor && isActive
+              : isActive;
+
+          return (
+            <TypeText
+              key={`${node.key ?? "text"}-${index}`}
+              text={child}
+              {...statefulTypeProps}
+              onComplete={() => handleLineComplete(index)}
+            />
+          );
+        }
+
         const mergedTypeProps = {
           ...node.typeProps,
           ...child.typeProps,
@@ -89,7 +129,7 @@ export function SaiDOMRender(node: SaiNode) {
         };
         const statefulTypeProps = { ...mergedTypeProps };
         statefulTypeProps.animate =
-          mergedTypeProps.animate == false
+          mergedTypeProps.animate === false
             ? false
             : node.typeProps?.animate
               ? isActive
@@ -102,22 +142,17 @@ export function SaiDOMRender(node: SaiNode) {
             ? mergedTypeProps.showCursor && isActive
             : isActive;
 
-        if (typeof child == "string") {
-          return (
-            <TypeText
-              text={child}
-              {...statefulTypeProps}
-              onComplete={() => handleLineComplete(index)}
-            />
-          );
-        }
-        return SaiDOMRender({
-            component: child.component,
-            attrs: child.attrs,
-            typeProps: {
-              ...statefulTypeProps,
-            },
-          })
+        return (
+          <SaiDOMRender
+            node={{
+              ...child,
+              typeProps: {
+                ...statefulTypeProps,
+              },
+              onComplete: () => handleLineComplete(index),
+            }}
+          />
+        );
       })}
     </Root>
   );
