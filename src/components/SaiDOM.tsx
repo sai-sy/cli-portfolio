@@ -156,17 +156,27 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
             ? mergedTypeProps.showCursor && isActive
             : isActive;
 
+        let childnode: SaiNode = {
+          ...child,
+          typeProps: {
+            ...statefulTypeProps,
+          },
+          onComplete: () => handleLineComplete(index),
+        };
+        const showPrompt =
+          node.key == "home-root" && childnode.typeProps?.fileDir;
+
         return (
-          <SaiDOMRender
-            node={{
-              ...child,
-              typeProps: {
-                ...statefulTypeProps,
-              },
-              onComplete: () => handleLineComplete(index),
-            }}
-          />
+          <span className="lineout">
+            {showPrompt && (
+              <>
+                <span className="fileDir">{cwd}</span>${" "}
+              </>
+            )}
+            <SaiDOMRender node={childnode} />
+          </span>
         );
+
       })}
     </Root>
   );

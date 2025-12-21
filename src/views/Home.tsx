@@ -68,6 +68,7 @@ export default function Home({
         {
           key: "desc",
           component: "p",
+          typeProps: { animate: false },
           children: [
             "I build this page using Vite, React, Typescript, TSX and am hosting it on Railway. My goal is eventually make this my portfolio site that can be used like a command line while still being visually appealing and usable by a normal user",
           ],
