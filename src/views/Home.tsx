@@ -17,7 +17,7 @@ export default function Home({
       key: "home-root",
       attrs: { className: "home container" },
       typeProps: { animate: transitionIn, speed: 0, showCursor: true },
-      childrenProps: { speed: 0 },
+      childrenProps: { speed: 20 },
       onComplete: () => onComplete("home"),
       children: [
         { key: "title", component: "h1", children: ["Saihaan Syed"] },
@@ -30,6 +30,7 @@ export default function Home({
         {
           key: "nav",
           component: "nav",
+          typeProps: { animate: false },
           children: [
             {
               key: "nav-projects-a",
@@ -41,6 +42,7 @@ export default function Home({
             {
               key: "nav-about-a",
               component: "a",
+              attrs: {className: "directory"},
               typeProps: { fileDir: false },
               children: ["about"],
             },
@@ -57,20 +59,26 @@ export default function Home({
               typeProps: { fileDir: false },
               children: ["contact"],
             },
+            {
+              key: "nav-contact-a",
+              component: "a",
+              typeProps: { fileDir: false },
+              children: ["README.md"],
+            },
           ],
         },
         {
           key: "third",
           component: "p",
           typeProps: { fileDir: "~" },
-          children: ["cat about"],
+          children: ["cat README.md"],
         },
         {
           key: "desc",
           component: "p",
           typeProps: { animate: false },
           children: [
-            "I build this page using Vite, React, Typescript, TSX and am hosting it on Railway. My goal is eventually make this my portfolio site that can be used like a command line while still being visually appealing and usable by a normal user",
+            "# Sai's CLI Portfolio. I built a virtual dom to manage the line rendering, so you can navigate as you would any site, or you can pass standard file navigation bash commands if you're a no-mouse full efficiency type of person! (coming-soon)",
           ],
         },
       ],

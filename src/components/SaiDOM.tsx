@@ -93,8 +93,7 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
               showCursor: false,
             },
           };
-          const showPrompt =
-            node.key == "home-root" && childnode.typeProps?.fileDir;
+          const showPrompt = node.key == "home-root" && childnode.typeProps?.fileDir;
 
           return (
             <span className="lineout">

@@ -60,9 +60,10 @@ function TypeText({
     };
   }, [text, speed, delay, onComplete]);
   return (
-    <>{typed}
+    <>
+      {typed}
 
-    {/*{fileDir === true ? (
+      {/*{fileDir === true ? (
         <>
           <span className="fileDir">{cwd}</span>
           {"$ "}
