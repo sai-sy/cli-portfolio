@@ -20,13 +20,13 @@ function TypeText({
   showCursor = true,
   delay = 0,
   animate = false,
-  fileDir = false,
+  fileDir: _fileDir = false,
   onComplete = () => {},
 }: TypeTextProps) {
   const [typed, setTyped] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [cursor, setCursor] = useState(showCursor);
-  const { cwd, setCwd: _unused } = useContext(CwdContext)!;
+  const { cwd: _cwd, setCwd: _unused } = useContext(CwdContext)!;
 
   if (!text) text = "";
   useEffect(() => {

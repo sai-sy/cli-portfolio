@@ -30,12 +30,12 @@ export default function Home({
         {
           key: "nav",
           component: "nav",
-          typeProps: { fileDir: "~" },
           children: [
             {
               key: "nav-projects-a",
               component: "a",
-              typeProps: { fileDir: false },
+              attrs: {"className": "directory"},
+              typeProps: { fileDir: false},
               children: ["projects"],
             },
             {
@@ -44,8 +44,19 @@ export default function Home({
               typeProps: { fileDir: false },
               children: ["about"],
             },
-
-            "experience        contact",
+            {
+              key: "nav-experience-a",
+              component: "a",
+              attrs: {className: "directory"},
+              typeProps: { fileDir: false},
+              children: ["experience"],
+            },
+            {
+              key: "nav-contact-a",
+              component: "a",
+              typeProps: { fileDir: false },
+              children: ["contact"],
+            },
           ],
         },
         {
