@@ -22,13 +22,6 @@ export default function Home({
       children: [
         { key: "title", component: "h1", children: ["Saihaan Syed"] },
         {
-          key: "desc",
-          component: "p",
-          children: [
-            "I build this page using Vite, React, Typescript, TSX and am hosting it on Railway. My goal is eventually make this my portfolio site that can be used like a command line while still being visually appealing and usable by a normal user",
-          ],
-        },
-        {
           key: "nav-ls",
           component: "p",
           typeProps: { fileDir: "~" },
@@ -37,19 +30,35 @@ export default function Home({
         {
           key: "nav",
           component: "nav",
-          children: ["projects        experience        contact"],
+          typeProps: { fileDir: "~" },
+          children: [
+            {
+              key: "nav-projects-a",
+              component: "a",
+              typeProps: { fileDir: false },
+              children: ["projects"],
+            },
+            {
+              key: "nav-about-a",
+              component: "a",
+              typeProps: { fileDir: false },
+              children: ["about"],
+            },
+
+            "experience        contact",
+          ],
         },
         {
           key: "third",
           component: "p",
           typeProps: { fileDir: "~" },
-          children: ["cat projects"],
+          children: ["cat about"],
         },
         {
-          key: "fourth",
+          key: "desc",
           component: "p",
           children: [
-            "blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph blah blah example long text paragraph  blah blah example long text paragraph",
+            "I build this page using Vite, React, Typescript, TSX and am hosting it on Railway. My goal is eventually make this my portfolio site that can be used like a command line while still being visually appealing and usable by a normal user",
           ],
         },
       ],
@@ -57,5 +66,5 @@ export default function Home({
     [onComplete, transitionIn],
   );
 
-  return <SaiDOMRender node={nodes}/>;
+  return <SaiDOMRender node={nodes} />;
 }

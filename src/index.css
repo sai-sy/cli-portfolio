@@ -50,6 +50,11 @@ p, h1, h2, h3, h4, h5, h6 {
   max-width: 1024px;
 }
 
+h1 {
+  font-size: 3.2em;
+  color: var(--ctp-mocha-mauve);
+}
+
 a {
   font-weight: 500;
   color: var(--ctp-mocha-blue);
@@ -65,11 +70,6 @@ nav {
 
 a:hover {
   text-decoration: underline;
-}
-
-h1 {
-  font-size: 3.2em;
-  color: var(--ctp-mocha-mauve);
 }
 
 button {
@@ -132,8 +132,15 @@ button:focus-visible {
 }
 
 .fileDir {
+  text-decoration: none;
   color: var(--ctp-mocha-green);
 }
+
+.fileDir:hover {
+  text-decoration: none;
+  color: var(--ctp-mocha-green);
+}
+
 
 /*
 * View specific styles

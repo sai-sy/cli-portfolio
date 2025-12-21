@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState, type JSX } from "react";
+import { useCallback, useContext, useMemo, useState, type JSX } from "react";
 import type { TypeTextProps } from "./TypeText";
 import TypeText from "./TypeText";
+import { CwdContext } from "../context/CwdContext";
 
 export type SaiElement = {
   component: keyof JSX.IntrinsicElements;
@@ -30,7 +31,8 @@ export type SaiNode = SaiElement | string;
 type SaiDomRenderProps = { node: SaiNode };
 
 export function SaiDOMRender({ node }: SaiDomRenderProps) {
-  console.log("SaiDOMRender", node);
+  const { cwd, setCwd: _unused } = useContext(CwdContext)!;
+
   if (typeof node === "string") {
     return node;
   }
@@ -42,9 +44,7 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
           ? child
           : {
               ...child,
-              key:
-                child.key ??
-                `node-${index}-${"component" in child ? child.component : "str"}`,
+              key: `${child?.key}-node-${index}-${child.component ?? "str"}`,
             },
       ) ?? [],
     [node.children],
@@ -61,9 +61,9 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
     [node.onComplete, safeChildNodes.length],
   );
   const Root = node.component;
-  console.log("render", node.key);
+  let cName = `${node.attrs?.className ?? ""} domout ${node?.key}`;
   return (
-    <Root key={node.key} className={`${node.attrs?.className ?? ""} domout`}>
+    <Root key={node.key} className={cName}>
       {safeChildNodes.map((child, index) => {
         const isActive = index === current;
 
@@ -81,6 +81,8 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
               />
             );
           }
+          console.log("render", node.key);
+
           let childnode: SaiNode = {
             ...child,
             typeProps: {
@@ -91,7 +93,19 @@ export function SaiDOMRender({ node }: SaiDomRenderProps) {
               showCursor: false,
             },
           };
-          return <SaiDOMRender node={childnode} />;
+          const showPrompt =
+            node.key == "home-root" && (childnode.typeProps?.fileDir);
+
+          return (
+            <>
+              {showPrompt && (
+                <>
+                  <span className={`fileDir ${childnode.key}`}>{cwd}</span>
+                  {"$ "}
+                </>
+              )}<SaiDOMRender node={childnode} />
+            </>
+          );
         }
         if (index > current) return null;
 
