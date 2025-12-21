@@ -26,7 +26,7 @@ export default function Load({
           onComplete={() => {
             setTimeout(() => {
               setCwd(cwd + "~");
-              onComplete("test");
+              onComplete("home");
             }, 175);
           }}
         />
