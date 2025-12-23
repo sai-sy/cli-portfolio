@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { SaiDOMRender, type SaiElement } from "../components/SaiDOM";
 import type { ViewName } from "../viewRegistry";
+import LineIn from "../components/LineIn";
 
 type HomeProps = {
   transitionIn?: boolean;
@@ -20,7 +21,11 @@ export default function Home({
       childrenProps: { speed: 20 },
       onComplete: () => onComplete("home"),
       children: [
-        { key: "title", component: "h1", children: ["Saihaan Syed (under construction)"] },
+        {
+          key: "title",
+          component: "h1",
+          children: ["Saihaan Syed (under construction)"],
+        },
         {
           key: "nav-ls",
           component: "p",
@@ -50,42 +55,50 @@ export default function Home({
               component: "a",
               attrs: { className: "directory" },
               typeProps: { fileDir: false },
-              children: [{
+              children: [
+                {
                   key: "nav-about-a-h2",
                   component: "h2",
                   children: ["about"],
-                },],
+                },
+              ],
             },
             {
               key: "nav-experience-a",
               component: "a",
               attrs: { className: "directory" },
               typeProps: { fileDir: false },
-              children: [{
+              children: [
+                {
                   key: "nav-experience-a-h2",
                   component: "h2",
                   children: ["experience"],
-                },],
+                },
+              ],
             },
             {
               key: "nav-readme-a",
               component: "a",
               typeProps: { fileDir: false },
-              children: [{
+              children: [
+                {
                   key: "nav-readme-a-h2",
                   component: "h2",
                   children: ["README.md"],
-                },],
+                },
+              ],
             },
             {
               key: "nav-contact-a",
               component: "a",
               typeProps: { fileDir: false },
-              children: [{
+              children: [
+                {
                   key: "nav-about-a-h2",
                   component: "h2",
                   children: ["contact"],
-                },],
+                },
+              ],
             },
           ],
         },
@@ -108,5 +121,10 @@ export default function Home({
     [onComplete, transitionIn],
   );
 
-  return <SaiDOMRender node={nodes} />;
+  return (
+    <>
+      <SaiDOMRender node={nodes} />
+      <LineIn />
+    </>
+  );
 }

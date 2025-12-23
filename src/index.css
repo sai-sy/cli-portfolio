@@ -147,6 +147,16 @@ button:focus-visible {
   display: inline;
 }
 
+.linein__input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+}
+
 .fileDir {
   text-decoration: none;
   color: var(--ctp-mocha-green);
