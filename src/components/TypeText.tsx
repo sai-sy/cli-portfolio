@@ -76,7 +76,7 @@ function TypeText({
       ) : (
         ""
       )}*/}
-      {showCursor && cursor && (
+      {!(typed.length === text.length) && showCursor && cursor && (
         <span
           className={`cursor ${isTyping ? "cursor--static" : "cursor--blink"}`}
         >

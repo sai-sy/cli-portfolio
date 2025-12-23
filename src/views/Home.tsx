@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { SaiDOMRender, type SaiElement } from "../components/SaiDOM";
 import type { ViewName } from "../viewRegistry";
 import LineIn from "../components/LineIn";
@@ -12,6 +12,12 @@ export default function Home({
   transitionIn = true,
   onComplete = () => {},
 }: HomeProps) {
+  const [isDomComplete, setIsDomComplete] = useState(false);
+
+  const handleDomComplete = useCallback(() => {
+    setIsDomComplete(true);
+  }, [onComplete]);
+
   const nodes = useMemo<SaiElement>(
     () => ({
       component: "div",
@@ -19,7 +25,7 @@ export default function Home({
       attrs: { className: "home container" },
       typeProps: { animate: transitionIn, speed: 0, showCursor: true },
       childrenProps: { speed: 20 },
-      onComplete: () => onComplete("home"),
+      onComplete: handleDomComplete,
       children: [
         {
           key: "title",
@@ -94,37 +100,37 @@ export default function Home({
               typeProps: { fileDir: false },
               children: [
                 {
-                  key: "nav-about-a-h2",
+                  key: "nav-contact-a-h2",
                   component: "h2",
                   children: ["contact"],
                 },
               ],
             },
           ],
-        },
+        },'',
         {
-          key: "third",
+          key: "cat-readme-line",
           component: "p",
-          typeProps: { fileDir: "~" },
-          children: ["cat README.md"],
+          typeProps: { fileDir: "~", animate: true },
+          children: ["cat README.md",],
         },
         {
           key: "desc",
           component: "p",
-          typeProps: { animate: false },
+          typeProps: {animate: false },
           children: [
             "# Sai's CLI Portfolio under construction! Please check out https://github.com/sai-sy and https://github.com/chester-hill-solutions for my work. I built a virtual dom to manage the line rendering, so you can navigate as you would any site, or you can pass standard file navigation bash commands if you're a no-mouse full efficiency type of person! (coming-soon)",
           ],
         },
       ],
     }),
-    [onComplete, transitionIn],
+    [transitionIn],
   );
 
   return (
     <>
       <SaiDOMRender node={nodes} />
-      <LineIn />
+      {isDomComplete && <LineIn />}
     </>
   );
 }
