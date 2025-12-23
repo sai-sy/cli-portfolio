@@ -20,12 +20,12 @@ export default function Home({
       childrenProps: { speed: 20 },
       onComplete: () => onComplete("home"),
       children: [
-        { key: "title", component: "h1", children: ["Saihaan Syed"] },
+        { key: "title", component: "h1", children: ["Saihaan Syed (under construction)"] },
         {
           key: "nav-ls",
           component: "p",
           typeProps: { fileDir: "~" },
-          children: ["ls"],
+          children: ["ls && cat socials"],
         },
         {
           key: "nav",
@@ -35,35 +35,57 @@ export default function Home({
             {
               key: "nav-projects-a",
               component: "a",
-              attrs: {"className": "directory"},
-              typeProps: { fileDir: false},
-              children: ["projects"],
+              attrs: { className: "directory" },
+              typeProps: { fileDir: false },
+              children: [
+                {
+                  key: "nav-projects-a-h2",
+                  component: "h2",
+                  children: ["projects"],
+                },
+              ],
             },
             {
               key: "nav-about-a",
               component: "a",
-              attrs: {className: "directory"},
+              attrs: { className: "directory" },
               typeProps: { fileDir: false },
-              children: ["about"],
+              children: [{
+                  key: "nav-about-a-h2",
+                  component: "h2",
+                  children: ["about"],
+                },],
             },
             {
               key: "nav-experience-a",
               component: "a",
-              attrs: {className: "directory"},
-              typeProps: { fileDir: false},
-              children: ["experience"],
+              attrs: { className: "directory" },
+              typeProps: { fileDir: false },
+              children: [{
+                  key: "nav-experience-a-h2",
+                  component: "h2",
+                  children: ["experience"],
+                },],
+            },
+            {
+              key: "nav-readme-a",
+              component: "a",
+              typeProps: { fileDir: false },
+              children: [{
+                  key: "nav-readme-a-h2",
+                  component: "h2",
+                  children: ["README.md"],
+                },],
             },
             {
               key: "nav-contact-a",
               component: "a",
               typeProps: { fileDir: false },
-              children: ["contact"],
-            },
-            {
-              key: "nav-contact-a",
-              component: "a",
-              typeProps: { fileDir: false },
-              children: ["README.md"],
+              children: [{
+                  key: "nav-about-a-h2",
+                  component: "h2",
+                  children: ["contact"],
+                },],
             },
           ],
         },
@@ -78,7 +100,7 @@ export default function Home({
           component: "p",
           typeProps: { animate: false },
           children: [
-            "# Sai's CLI Portfolio. I built a virtual dom to manage the line rendering, so you can navigate as you would any site, or you can pass standard file navigation bash commands if you're a no-mouse full efficiency type of person! (coming-soon)",
+            "# Sai's CLI Portfolio under construction! Please check out https://github.com/sai-sy and https://github.com/chester-hill-solutions for my work. I built a virtual dom to manage the line rendering, so you can navigate as you would any site, or you can pass standard file navigation bash commands if you're a no-mouse full efficiency type of person! (coming-soon)",
           ],
         },
       ],
