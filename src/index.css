@@ -155,6 +155,8 @@ button:focus-visible {
   font: inherit;
   padding: 0;
   margin: 0;
+  caret-color: var(--ctp-mocha-rosewater);
+  caret-shape: block;
 }
 
 .fileDir {
