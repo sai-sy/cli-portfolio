@@ -8,8 +8,6 @@ type LoadProps = {
   onComplete?: (name: ViewName) => void;
 };
 
-export function enter() {}
-export function exit() {}
 export default function Load({
   transitionIn = true,
   onComplete = () => {},
@@ -26,7 +24,7 @@ export default function Load({
           onComplete={() => {
             setTimeout(() => {
               setCwd(cwd + "~");
-              onComplete("home");
+              onComplete("terminal");
             }, 175);
           }}
         />
