@@ -5,6 +5,7 @@
     "JetBrains Mono", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1;
   font-weight: 400;
+  font-size: 18px;
 
   color-scheme: light dark;
   color: var(--ctp-mocha-text);
@@ -157,6 +158,10 @@ button:focus-visible {
   align-items: center;
 }
 
+.linein__prompt {
+  margin-right: 1ch;
+}
+
 .linein__input {
   background: transparent;
   border: none;
@@ -167,11 +172,7 @@ button:focus-visible {
   margin: 0;
   caret-color: var(--ctp-mocha-rosewater);
   caret-shape: block;
-  line-height: inherit;
-  vertical-align: baseline;
   appearance: none;
-  height: var(--terminal-line-height);
-  line-height: var(--terminal-line-height);
   box-sizing: border-box;
   appearance: none;
   vertical-align: top;

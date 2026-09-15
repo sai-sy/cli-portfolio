@@ -14,15 +14,17 @@ export default function Scrollback({ entries }: ScrollbackProps) {
     <div className="scrollback">
       {entries.map((entry) => (
         <div className="scrollback_entry_line lineout" key={entry.id}>
-          {
-            entry.cwd ? (
+          <p>
+            {entry.cwd ? (
               <>
                 <span className="fileDir">{entry.cwd}</span>
-                {"$ "}
+                <span className="linein__prompt">$</span>
                 {entry.value}
               </>
-            ) : entry.value
-          }
+            ) : (
+              entry.value
+            )}
+          </p>
         </div>
       ))}
     </div>

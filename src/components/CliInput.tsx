@@ -5,7 +5,7 @@ type CliInputProps = {
   onSubmit?: (value: string) => void;
 };
 
-export default function CliInput({ onSubmit = () => {} }: CliInputProps) {
+export default function CliInput({ onSubmit = () => { } }: CliInputProps) {
   const { cwd, setCwd: _unused } = useContext(CwdContext)!;
   const [value, setValue] = useState("");
 
@@ -17,7 +17,8 @@ export default function CliInput({ onSubmit = () => {} }: CliInputProps) {
 
   return (
     <form className="lineout linein" onSubmit={handleSubmit}>
-      <span className="fileDir">{cwd}</span>${" "}
+      <span className="fileDir">{cwd}</span>
+      <span className="linein__prompt">$</span>
       <input
         className="linein__input"
         type="text"
